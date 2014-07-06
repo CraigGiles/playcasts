@@ -1,0 +1,17 @@
+@(title: String)(content: Html)
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>@title</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    </head>
+    <body>
+        @navbar()
+        <!-- Main jumbotron for a primary marketing message or call to action -->
+        <div class="jumbotron">
+            @content
+        </div>
+    </body>
+</html>
