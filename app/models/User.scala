@@ -23,6 +23,17 @@ object User {
                  row[DateTime]("updated_at"), row[DateTime]("deleted_at"))
         ).list
     }
+
+    def findByEmail(value: String): User = DB.withConnection {
+        implicit connection =>
+            val users = SQL("select * from users where email={value}").on("value" -> value).map( row =>
+                            User(row[Long]("id"), row[String]("name"), row[String]("email"), 
+                                 row[String]("password"), row[DateTime]("created_at"), 
+                                 row[DateTime]("updated_at"), row[DateTime]("deleted_at"))
+                            ).list
+
+            users.head
+    }
 }
 
 //param: Option[String] = None
