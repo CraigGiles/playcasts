@@ -4,7 +4,7 @@ CREATE TABLE `users` (
   `name` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `deleted_at` timestamp NOT NULL DEFAULT '1970-01-01 00:00:00',
+  `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NOT NULL,
   `updated_at` timestamp NOT NULL,
   PRIMARY KEY (`id`),
