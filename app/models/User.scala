@@ -11,7 +11,7 @@ import anorm.SqlParser._
 import java.sql._
 import utilities.AnormExtension._
 
-case class User(id: Long, name: String, email: String, password_hash: String, 
+case class User(id: Long, name: String, email: String, password: String, 
     created_at: DateTime, updated_at: DateTime, deleted_at: DateTime)
 
 object User {
@@ -19,7 +19,7 @@ object User {
         implicit connection =>
         SQL("select * from users").map( row =>
             User(row[Long]("id"), row[String]("name"), row[String]("email"), 
-                 row[String]("password_hash"), row[DateTime]("created_at"), 
+                 row[String]("password"), row[DateTime]("created_at"), 
                  row[DateTime]("updated_at"), row[DateTime]("deleted_at"))
         ).list
     }
