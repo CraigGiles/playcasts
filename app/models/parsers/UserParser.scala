@@ -16,11 +16,9 @@ object UserParser {
         str("password") ~
         date("created_at") ~
         date("updated_at") ~
-        get[Option[String]]("deleted_at") map { //date("deleted_at") map {
+        get[Option[String]]("deleted_at") map { 
             case id ~ name ~ email ~ password ~ created_at ~ updated_at ~ deleted_at =>
                 User(id, name, email, password, new DateTime(created_at), new DateTime(updated_at), optionalDate(deleted_at))
-            // case id ~ name ~ email ~ password ~ created_at ~ updated_at =>
-            //     User(id, name, email, password, new DateTime(created_at), new DateTime(updated_at), None)
         }
     }
 
