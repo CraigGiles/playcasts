@@ -35,5 +35,3 @@ object User {
             users.head
     }
 }
-
-//param: Option[String] = None
