@@ -10,6 +10,8 @@ import anorm.~
 import anorm._
 import anorm.SqlParser._
 import java.sql._
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException
+
 import utilities.AnormExtension._
 
 import models.parsers.UserParser._
@@ -29,5 +31,23 @@ object User {
             .headOption
     }
 
+    def insert: Option[Long] = DB.withConnection { implicit connection => 
+        val sqlQuery = SQL(
+            """
+            INSERT INTO users(name, email, password, created_at, updated_at)
+            VALUES({name}, {email}, {password}, {created_at}, {updated_at})
+            """
+        )
+
+        try {
+            sqlQuery.on("name" -> "cgiles", "email" -> "email", "password" -> "password", 
+                        "created_at" -> new DateTime(), "updated_at" -> new DateTime())
+                    .executeInsert()
+        } catch {
+            case e:MySQLIntegrityConstraintViolationException => { println("MySQL Constraint: " + e); None } 
+            case e:Exception => { println(e); None } 
+        }
+
+    }
 }
 
