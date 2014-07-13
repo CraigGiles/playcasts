@@ -15,3 +15,4 @@ dist
 /.settings
 tags
 application.conf
+.DS_Store

@@ -6,6 +6,7 @@
 GET     /                           controllers.Home.index
 GET     /about                      controllers.Home.about
 GET     /contact                    controllers.Home.contact
+GET     /addUser                    controllers.Home.addUser
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

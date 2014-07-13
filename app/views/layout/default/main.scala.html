@@ -9,7 +9,11 @@
     </head>
     <body>
         @layout.default.partial.navbar()
-        @content
+
+        <div class="body">
+            @content
+        </div>
+        
         @layout.default.partial.footer()
     </body>
 </html>
