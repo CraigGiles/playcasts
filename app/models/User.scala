@@ -1,53 +1,43 @@
 package models
 
 import org.joda.time._
-import org.joda.time.format._
 
-import play.api.db.DB
-import play.api.Play.current
+import database._
 
-import anorm.~
-import anorm._
-import anorm.SqlParser._
-import java.sql._
-import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException
+import scala.slick.lifted.TableQuery
 
-import utilities.AnormExtension._
+import scala.slick.driver.MySQLDriver.simple._
+import scala.slick.lifted.ProvenShape
+import com.github.tototoshi.slick.MySQLJodaSupport._
 
-import models.parsers.UserParser._
+/**
+ * User case class denotes a user of the system
+ *
+ * @param id Primary Key
+ * @param email Users email address
+ * @param password Users password hash
+ * @param created_at Timestamp which this user was created
+ * @param updated_at Timestamp which this user was last updated
+ * @param deleted_at Timestamp which this user was soft deleted
+ */
+case class User(id: Option[Int], name: String, email: String, password: String,
+                created_at: DateTime, updated_at: DateTime, deleted_at: Option[DateTime])
 
-case class User(id: Long, name: String, email: String, password: String, 
-    created_at: DateTime, updated_at: DateTime, deleted_at: Option[DateTime])
+class Users(tag: Tag) extends Table[(Int, String, String, String, DateTime, DateTime, Option[DateTime])](tag, "users") {
+    def id: Column[Int] = column[Int]("id", O.PrimaryKey, O.AutoInc)
+    def name: Column[String] = column[String]("name")
+    def email: Column[String] = column[String]("email")
+    def password: Column[String] = column[String]("password")
+    def created_at: Column[DateTime] = column[DateTime]("created_at")
+    def updated_at: Column[DateTime] = column[DateTime]("updated_at")
+    def deleted_at: Column[Option[DateTime]] = column[Option[DateTime]]("deleted_at", O.Nullable)
 
-object User {
-    def findAll: Seq[User] = DB.withConnection { implicit connection =>
-        SQL("select * from users").as(usersParser)
-    }
-    
-    def findByEmail(email: String): Option[User] = DB.withConnection { implicit connection =>
-        SQL("select * from users where email={value}")
-            .on("value" -> email)
-            .as(usersParser)
-            .headOption
-    }
-
-    def insert: Option[Long] = DB.withConnection { implicit connection => 
-        val sqlQuery = SQL(
-            """
-            INSERT INTO users(name, email, password, created_at, updated_at)
-            VALUES({name}, {email}, {password}, {created_at}, {updated_at})
-            """
-        )
-
-        try {
-            sqlQuery.on("name" -> "cgiles", "email" -> "email", "password" -> "password", 
-                        "created_at" -> new DateTime(), "updated_at" -> new DateTime())
-                    .executeInsert()
-        } catch {
-            case e:MySQLIntegrityConstraintViolationException => { println("MySQL Constraint: " + e); None } 
-            case e:Exception => { println(e); None } 
-        }
-
-    }
+    def * : ProvenShape[(Int, String, String, String, DateTime, DateTime, Option[DateTime])] =
+        (id, name, email, password, created_at, updated_at, deleted_at)
 }
 
+object Users {
+    def create(u: (Int, String, String, String, DateTime, DateTime, Option[DateTime])): User = {
+        User(Some(u._1), u._2, u._3, u._4, u._5, u._6, u._7)
+    }
+}

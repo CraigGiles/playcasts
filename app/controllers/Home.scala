@@ -1,7 +1,10 @@
 package controllers
 
+import database.slick.UserRepositoryComponentSlick
 import play.api._
 import play.api.mvc._
+import services.ServiceWiring
+import wiring.ApplicationWiring
 
 object Home extends Controller {
 
@@ -18,11 +21,19 @@ object Home extends Controller {
     }
 
     def addUser = Action {
-        import models._
-//        val user = User.findByEmail("craig@gilesc.com")
-        val id = User.insert
-        val user = User.findAll
-        println(user)
-        Ok("hello user")
+        val service = ServiceWiring.getUserService
+
+        val usr = service.find(1)
+        println(usr)
+
+        val u = usr.getOrElse("Bob")
+
+
+//        import models._
+////        val user = User.findByEmail("craig@gilesc.com")
+//        val id = User.insert
+//        val user = User.findAll
+//        println(user)
+        Ok("hello " + u)
     }
 }

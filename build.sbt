@@ -10,14 +10,16 @@ libraryDependencies ++= Seq(
   jdbc,
   anorm,
   cache,
-  ws
+  ws,
+  "com.typesafe.play" %% "play-slick" % "0.8.1",
+  "org.slf4j" % "slf4j-nop" % "1.6.4",
+  "joda-time" % "joda-time" % "2.4",
+  "org.joda" % "joda-convert" % "1.6",
+  "com.github.tototoshi" %% "slick-joda-mapper" % "1.2.0"
 )
 
-libraryDependencies += "org.scalatestplus" %% "play" % "1.1.0" % "test"
-
+// Database
 libraryDependencies += "mysql" % "mysql-connector-java" % "5.1.31"
-
-libraryDependencies += "joda-time" % "joda-time" % "2.0"
 
 libraryDependencies += "org.mockito" % "mockito-core" % "1.9.5"
 
