@@ -2,6 +2,9 @@ package controllers
 
 import play.api._
 import play.api.mvc._
+import repositories.users.sql.UserRepositorySqlComponent
+import services.DefaultUserServiceComponent
+import wiring.ApplicationWiring
 
 object Home extends Controller {
 
@@ -18,11 +21,15 @@ object Home extends Controller {
     }
 
     def addUser = Action {
-        import models._
-//        val user = User.findByEmail("craig@gilesc.com")
-        val id = User.insert
-        val user = User.findAll
-        println(user)
+        val service = ApplicationWiring.getUserService
+
+        val usr = service.find(1)
+        println(usr)
+//        import models._
+////        val user = User.findByEmail("craig@gilesc.com")
+//        val id = User.insert
+//        val user = User.findAll
+//        println(user)
         Ok("hello user")
     }
 }
