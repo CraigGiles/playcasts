@@ -5,7 +5,7 @@ import models.{Users, User}
 import org.joda.time.DateTime
 
 import scala.slick.lifted.TableQuery
-import scala.slick.driver.MySQLDriver.simple._
+import database.DatabaseDriver.simple._
 
 trait UserRepositoryComponentSlick extends UserRepositoryComponent {
   def userRepository = new SlickUserRepository
@@ -15,7 +15,7 @@ trait UserRepositoryComponentSlick extends UserRepositoryComponent {
 
     override def findById(id: Int): Option[User] = {
       database withSession { implicit session =>
-        val user = users.list.find(u => u._1 == id)
+        val user = users.list.find(u => u._1 == Some(id))
         user.map(u => Users.create(u))
       }
     }
