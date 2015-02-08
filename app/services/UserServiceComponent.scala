@@ -1,7 +1,7 @@
 package services
 
+import database.UserRepositoryComponent
 import models.User
-import repositories.users.UserRepositoryComponent
 
 trait UserServiceComponent {
   this: UserRepositoryComponent =>
@@ -9,8 +9,8 @@ trait UserServiceComponent {
   val service: UserService = new UserService
 
   class UserService {
-    def find(id: Int): User = {
-      repository.find(id)
+    def find(id: Int): Option[User] = {
+      repository.findById(id)
     }
 
     def save(user: User): Unit = {
