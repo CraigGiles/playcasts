@@ -2,7 +2,6 @@ package database.slick
 
 import database.DatabaseDriver
 import play.api.Play
-import scala.slick.driver._
 
 trait Slickable {
 
