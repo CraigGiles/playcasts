@@ -2,7 +2,8 @@ package controllers
 
 import play.api._
 import play.api.mvc._
-import repositories.users.sql.UserRepositorySqlComponent
+import repositories.TradeServiceAssembly
+import repositories.users.sql.UserRepositoryComponentSlick
 import services.ServiceWiring
 import wiring.ApplicationWiring
 
@@ -25,6 +26,11 @@ object Home extends Controller {
 
         val usr = service.find(1)
         println(usr)
+
+        val tradeService = TradeServiceAssembly.tradeService
+        val t = tradeService.fetchTrade("r-123")
+        tradeService.writeTrade(t)
+
 //        import models._
 ////        val user = User.findByEmail("craig@gilesc.com")
 //        val id = User.insert

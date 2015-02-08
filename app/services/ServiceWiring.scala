@@ -1,12 +1,13 @@
 package services
 
-import repositories.users.sql.UserRepositorySqlComponent
+import repositories.users.UserRepositoryComponent
+import repositories.users.sql.UserRepositoryComponentSlick
 
 object ServiceWiring {
-  val userServiceComponent = new UserServiceComponent with UserRepositorySqlComponent {
-    //expresses dependencies
-    override def repository: UserRepository = new UserRepositoryImpl
+  val userServiceComponent = new UserServiceComponent with UserRepositoryComponentSlick {
+    override def repository: UserRepository = new DefaultUserRepository
   }
 
   def getUserService = userServiceComponent.service
 }
+
