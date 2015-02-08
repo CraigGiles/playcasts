@@ -18,8 +18,13 @@ import com.github.tototoshi.slick.MySQLJodaSupport._
  * @param updated_at Timestamp which this user was last updated
  * @param deleted_at Timestamp which this user was soft deleted
  */
-case class User(id: Option[Int], name: String, email: String, password: String,
-                created_at: DateTime, updated_at: DateTime, deleted_at: Option[DateTime])
+case class User(id: Option[Int],
+                name: String,
+                email: String,
+                password: String,
+                created_at: DateTime,
+                updated_at: DateTime,
+                deleted_at: Option[DateTime])
 
 class Users(tag: Tag) extends Table[(Option[Int], String, String, String, DateTime, DateTime, Option[DateTime])](tag, "users") {
     def id: Column[Option[Int]] = column[Option[Int]]("id", O.PrimaryKey, O.AutoInc)
