@@ -4,8 +4,6 @@ import org.joda.time._
 
 import database._
 
-import scala.slick.lifted.TableQuery
-
 import DatabaseDriver.simple._
 import scala.slick.lifted.ProvenShape
 import com.github.tototoshi.slick.MySQLJodaSupport._
