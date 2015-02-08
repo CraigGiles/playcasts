@@ -8,7 +8,7 @@ CREATE TABLE `videos` (
   `updated_at` timestamp NOT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `link_unique` (`link`),
+  UNIQUE KEY `link_unique` (`link`)
 );
 
 # --- !Downs
