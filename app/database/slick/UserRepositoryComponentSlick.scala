@@ -1,11 +1,10 @@
 package database.slick
 
-import database.UserRepositoryComponent
 import models.{Users, User}
-import org.joda.time.DateTime
-
-import scala.slick.lifted.TableQuery
+import database.UserRepositoryComponent
+import database.slick.tables.Users
 import database.DatabaseDriver.simple._
+import scala.slick.lifted.TableQuery
 
 trait UserRepositoryComponentSlick extends UserRepositoryComponent {
   def userRepository = new SlickUserRepository
@@ -21,7 +20,7 @@ trait UserRepositoryComponentSlick extends UserRepositoryComponent {
     }
 
     override def save(user: User): Unit = {
-      
+
     }
 
     override def findByEmail(email: String): Option[User] = {
