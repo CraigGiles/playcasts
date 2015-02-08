@@ -1,8 +1,8 @@
 package database.slick
 
+import database.DatabaseDriver
 import play.api.Play
-
-import scala.slick.driver.MySQLDriver.simple._
+import scala.slick.driver._
 
 trait Slickable {
 
@@ -17,6 +17,6 @@ trait Slickable {
     val usr = Play.current.configuration.getString("db.default.user")
     val pass = Play.current.configuration.getString("db.default.password")
 
-    Database.forURL(url.get, driver = drv.get, user = usr.get, password = pass.get)
+    DatabaseDriver.simple.Database.forURL(url.get, driver = drv.get, user = usr.get, password = pass.get)
   }
 }

@@ -6,7 +6,7 @@ import database._
 
 import scala.slick.lifted.TableQuery
 
-import scala.slick.driver.MySQLDriver.simple._
+import DatabaseDriver.simple._
 import scala.slick.lifted.ProvenShape
 import com.github.tototoshi.slick.MySQLJodaSupport._
 
