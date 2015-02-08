@@ -9,12 +9,8 @@ trait UserServiceComponent {
   val service: UserService = new UserService
 
   class UserService {
-    def find(id: Int): Option[User] = {
-      repository.findById(id)
-    }
-
-    def save(user: User): Unit = {
-      repository.save(user)
-    }
+    def find(id: Int): Option[User] = repository.findById(id)
+    def findByEmail(email: String): Option[User] = repository.findByEmail(email)
+    def save(user: User): Unit = repository.save(user)
   }
 }

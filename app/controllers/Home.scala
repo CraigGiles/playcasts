@@ -1,10 +1,8 @@
 package controllers
 
-import database.slick.UserRepositoryComponentSlick
 import play.api._
 import play.api.mvc._
 import services.ServiceWiring
-import wiring.ApplicationWiring
 
 object Home extends Controller {
 
