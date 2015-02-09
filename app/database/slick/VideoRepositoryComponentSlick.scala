@@ -13,7 +13,7 @@ trait VideoRepositoryComponentSlick extends VideoRepositoryComponent {
   class SlickVideoRepository extends VideoRepository with Slickable {
     lazy val videos = TableQuery[Videos]
 
-    def all: Seq[Video] = {
+    def all(): Seq[Video] = {
       database withSession { implicit session =>
         videos.list.map(v => Videos.create(v))
       }

@@ -1,6 +1,7 @@
 package controllers
 
 import play.api._
+import play.api.libs.json.Json
 import play.api.mvc._
 import services.ServiceWiring
 
@@ -23,16 +24,20 @@ object Home extends Controller {
         val videos = ServiceWiring.getVideoService
 
         val usr = service.find(1)
-        println(usr)
+        val all = videos.getAllVideos()
 
         val u = usr.getOrElse("Bob")
 
+        val json = all.map(video => Json.obj(
+            "id" -> video.id,
+            "title" -> video.title,
+            "author" -> video.author,
+            "link" -> video.link,
+            "created_at" -> video.created_at,
+            "updated_at" -> video.updated_at,
+            "deleted_at" -> video.deleted_at
+        ))
 
-//        import models._
-////        val user = User.findByEmail("craig@gilesc.com")
-//        val id = User.insert
-//        val user = User.findAll
-//        println(user)
-        Ok("hello " + u)
+        Ok(json.toString())
     }
 }
