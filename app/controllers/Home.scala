@@ -20,6 +20,7 @@ object Home extends Controller {
 
     def addUser = Action {
         val service = ServiceWiring.getUserService
+        val videos = ServiceWiring.getVideoService
 
         val usr = service.find(1)
         println(usr)
