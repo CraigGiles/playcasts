@@ -22,5 +22,4 @@ case class User(id: Option[Int],
 
 
 object Users {
-    def create(u: (Option[Int], String, String, String, DateTime, DateTime, Option[DateTime])) = User.tupled(u)
 }
