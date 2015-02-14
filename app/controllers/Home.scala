@@ -23,9 +23,6 @@ object Home extends Controller {
     val users = UserClient.get
     val videos = VideoClient.get
 
-    // val service = ServiceWiring.getUserService
-    // val videos = ServiceWiring.getVideoService
-
     val usr = users.find(1)
     val all = videos.getAllVideos()
 
