@@ -15,7 +15,7 @@ trait UserRepositoryComponentSlick extends UserRepositoryComponent {
     override def findById(id: Int): Option[User] = {
       database withSession { implicit session =>
         val byId = usersTbl.findBy(_.id)
-        byId(Some(id)).list.headOption
+        byId(id).list.headOption
       }
     }
 

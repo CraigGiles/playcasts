@@ -12,7 +12,7 @@ import org.joda.time._
  * @param updated_at Timestamp which this user was last updated
  * @param deleted_at Timestamp which this user was soft deleted
  */
-case class User(id: Option[Int],
+case class User(id: Int,
                 name: String,
                 email: String,
                 password: String,
