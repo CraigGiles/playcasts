@@ -1,10 +1,9 @@
 package models
 
 import org.joda.time.DateTime
-import play.api.libs.json.{Json, JsValue, Writes}
 
 
-case class Video(id: Option[Int],
+case class Video(id: Int,
                  title: String,
                  author: String,
                  link: String,
@@ -14,5 +13,4 @@ case class Video(id: Option[Int],
 
 
 object Videos {
-  def create(u: (Option[Int], String, String, String, DateTime, DateTime, Option[DateTime])) = Video.tupled(u)
 }

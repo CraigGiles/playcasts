@@ -15,23 +15,29 @@ trait VideoRepositoryComponentSlick extends VideoRepositoryComponent {
 
     def all(): Seq[Video] = {
       database withSession { implicit session =>
-        videos.list.map(v => Videos.create(v))
+        videos.list
       }
     }
 
     override def findById(id: Int): Option[Video] = {
       database withSession { implicit session =>
-        val vids = videos.list.find(v => v._1 == Some(id))
-        vids.map(v => Videos.create(v))
+        val byId = videos.findBy(_.id)
+        byId(id).list.headOption
       }
     }
 
     override def findByAuthor(author: String): Seq[Video] = {
-      all.filter(v => v.author == author)
+      database withSession { implicit session =>
+        val byId = videos.findBy(_.author)
+        byId(author).list
+      }
     }
 
     override def findByTitle(title: String): Seq[Video] = {
-      all.filter(v => v.title == title)
+      database withSession { implicit session =>
+        val byId = videos.findBy(_.title)
+        byId(title).list
+      }
     }
 
     override def save(video: Video): Unit = {
